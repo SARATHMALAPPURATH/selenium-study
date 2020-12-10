@@ -1,7 +1,9 @@
 package com.qaguru.seleniumstudy.tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,6 +22,21 @@ public class DemoTest {
         Assert.assertEquals(expTitle,actTitle, "Incorrect title");
         Thread.sleep(1000);
         driver.quit();
+
+    }
+    @Test
+    public void searchingForAProduct() {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.get(baseUrl);
+        WebElement txtSearch = driver.findElement(By.name("search_field"));
+        txtSearch.sendKeys("table");
+        WebElement btnSearch = driver.findElement(By.xpath("//*[@id=\"search\"]/form/div/span/input"));
+        btnSearch.click();
+
+        WebElement linkResult = driver.findElement(By.linkText("Atlantic Height Adjustable Standing Desk Converter Large"));
+        linkResult.click();
+//        driver.quit();
 
     }
 }
